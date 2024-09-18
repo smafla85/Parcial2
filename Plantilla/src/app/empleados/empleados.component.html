@@ -1,0 +1,47 @@
+<div class="container">
+    <h2>Lista de Empleados</h2>
+    
+    <button class="btn btn-primary mb-3" (click)="nuevoEmpleado()">Nuevo Empleado</button>
+  
+    <div *ngIf="loading" class="text-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+    </div>
+  
+    <div *ngIf="error" class="alert alert-danger" role="alert">
+      {{ error }}
+    </div>
+  
+    <table class="table table-striped" *ngIf="!loading && !error">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Email</th>
+          <th>Teléfono</th>
+          <th>Departamento ID</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let empleado of empleados">
+          <td>{{ empleado.empleado_id }}</td>
+          <td>{{ empleado.nombre }}</td>
+          <td>{{ empleado.apellido }}</td>
+          <td>{{ empleado.email }}</td>
+          <td>{{ empleado.telefono }}</td>
+          <td>{{ empleado.departamento_id }}</td>
+          <td>
+            <button class="btn btn-sm btn-primary me-2" (click)="editarEmpleado(empleado.empleado_id)">Editar</button>
+            <button class="btn btn-sm btn-danger" (click)="eliminarEmpleado(empleado.empleado_id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div *ngIf="!loading && !error && empleados.length === 0" class="alert alert-info" role="alert">
+      No hay empleados registrados.
+    </div>
+  </div>
