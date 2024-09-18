@@ -1,33 +1,59 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Idepartamento } from '../Interfaces/departamentos';
+
+export interface IDepartamento {
+  departamento_id?: number;
+  nombre: string;
+  ubicacion: string;
+  jefe_departamento: string;
+  extension?: string;  // Ahora es opcional
+}
 
 @Injectable({
   providedIn: 'root'
 })
-export class DepartamentosService {
-  private apiUrl = 'http://localhost:81/parcial2/MVC/controllers/departamentos.controller.php';
+export class DepartamentoService {
+  private apiUrl = 'http://localhost:81/parcial2/MVC/controllers/departamentos.controller.php?op=';
 
   constructor(private http: HttpClient) { }
 
-  getDepartamentos(): Observable<Idepartamento[]> {
-    return this.http.get<Idepartamento[]>(`${this.apiUrl}?op=todos`);
+  todos(): Observable<IDepartamento[]> {
+    return this.http.get<IDepartamento[]>(`${this.apiUrl}todos`);
   }
 
-  getDepartamento(id: number): Observable<Idepartamento> {
-    return this.http.post<Idepartamento>(`${this.apiUrl}?op=uno`, { id });
+  uno(id: number): Observable<IDepartamento> {
+    const formData = new FormData();
+    formData.append('id', id.toString());
+    return this.http.post<IDepartamento>(`${this.apiUrl}uno`, formData);
   }
 
-  crearDepartamento(departamento: Idepartamento): Observable<any> {
-    return this.http.post(`${this.apiUrl}?op=insertar`, departamento);
+  insertar(departamento: IDepartamento): Observable<{status: string, message: string, id?: number}> {
+    const formData = new FormData();
+    formData.append('nombre', departamento.nombre);
+    formData.append('ubicacion', departamento.ubicacion);
+    formData.append('jefe_departamento', departamento.jefe_departamento);
+    if (departamento.extension) {
+      formData.append('extension', departamento.extension);
+    }
+    return this.http.post<{status: string, message: string, id?: number}>(`${this.apiUrl}insertar`, formData);
   }
 
-  actualizarDepartamento(departamento: Idepartamento): Observable<any> {
-    return this.http.post(`${this.apiUrl}?op=actualizar`, departamento);
+  actualizar(departamento: IDepartamento): Observable<{status: string, message: string}> {
+    const formData = new FormData();
+    formData.append('id', departamento.departamento_id!.toString());
+    formData.append('nombre', departamento.nombre);
+    formData.append('ubicacion', departamento.ubicacion);
+    formData.append('jefe_departamento', departamento.jefe_departamento);
+    if (departamento.extension) {
+      formData.append('extension', departamento.extension);
+    }
+    return this.http.post<{status: string, message: string}>(`${this.apiUrl}actualizar`, formData);
   }
 
-  eliminarDepartamento(id: number): Observable<any> {
-    return this.http.post(`${this.apiUrl}?op=eliminar`, { id });
+  eliminar(id: number): Observable<{status: string, message: string}> {
+    const formData = new FormData();
+    formData.append('id', id.toString());
+    return this.http.post<{status: string, message: string}>(`${this.apiUrl}eliminar`, formData);
   }
 }

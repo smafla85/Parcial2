@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { EmpleadosService } from '../Services/empleados.service';
-import { Iempleados } from '../Interfaces/empleados';
+import { RouterModule, Router } from '@angular/router';
+import { EmpleadoService, IEmpleados } from '../Services/empleados.service';
 
 @Component({
   selector: 'app-empleados',
@@ -12,11 +11,14 @@ import { Iempleados } from '../Interfaces/empleados';
   styleUrls: ['./empleados.component.scss']
 })
 export class EmpleadosComponent implements OnInit {
-  empleados: Iempleados[] = [];
+  empleados: IEmpleados[] = [];
   loading: boolean = true;
   error: string = '';
 
-  constructor(private empleadosService: EmpleadosService) { }
+  constructor(
+    private empleadoService: EmpleadoService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.cargarEmpleados();
@@ -24,7 +26,7 @@ export class EmpleadosComponent implements OnInit {
 
   cargarEmpleados(): void {
     this.loading = true;
-    this.empleadosService.getEmpleados().subscribe({
+    this.empleadoService.todos().subscribe({
       next: (data) => {
         this.empleados = data;
         this.loading = false;
@@ -38,14 +40,18 @@ export class EmpleadosComponent implements OnInit {
   }
 
   editarEmpleado(id: number): void {
-    // Usar Router.navigate en el componente que maneja la navegación
+    this.router.navigate(['/editarempleado', id]);
   }
 
   eliminarEmpleado(id: number): void {
     if (confirm('¿Está seguro de que desea eliminar este empleado?')) {
-      this.empleadosService.eliminarEmpleado(id).subscribe({
-        next: () => {
-          this.cargarEmpleados(); // Recargar la lista después de eliminar
+      this.empleadoService.eliminar(id).subscribe({
+        next: (response) => {
+          if (response.status === 'success') {
+            this.cargarEmpleados();
+          } else {
+            this.error = 'Error al eliminar empleado: ' + response.message;
+          }
         },
         error: (error) => {
           this.error = 'Error al eliminar empleado';
@@ -56,6 +62,6 @@ export class EmpleadosComponent implements OnInit {
   }
 
   nuevoEmpleado(): void {
-    // Usar Router.navigate en el componente que maneja la navegación
+    this.router.navigate(['/nuevoempleado']);
   }
 }

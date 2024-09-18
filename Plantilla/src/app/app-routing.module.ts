@@ -74,15 +74,14 @@ const routes: Routes = [
       },
       {
         path: 'nuevoempleado',
-        loadComponent: () => import('./empleados/nuevoempleado/nuevoempleado.component').then((m) => m.NuevoempleadoComponent)
+        loadComponent: () => import('./empleados/nuevoempleado/nuevoempleado.component').then((m) => m.NuevoEmpleadoComponent)
       },
       {
         path: 'editarempleado/:id',
-        loadComponent: () => import('./empleados/nuevoempleado/nuevoempleado.component').then((m) => m.NuevoempleadoComponent)
+        loadComponent: () => import('./empleados/nuevoempleado/nuevoempleado.component').then((m) => m.NuevoEmpleadoComponent)
       },
 
-      // Nuevas rutas para departamentos
-      {
+          {
         path: 'departamentos',
         loadComponent: () => import('./departamentos/departamentos.component').then((m) => m.DepartamentosComponent)
       },

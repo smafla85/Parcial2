@@ -49,16 +49,16 @@ class Empleados {
         $id = intval($id);
         $nombre = mysqli_real_escape_string($this->conexion, $nombre);
         $apellido = mysqli_real_escape_string($this->conexion, $apellido);
-        $email = mysqli_real_escape_string($this->conexion, $email);
-        $telefono = mysqli_real_escape_string($this->conexion, $telefono);
-        $departamento_id = $departamento_id ? intval($departamento_id) : "NULL";
-
+        $email = $email ? mysqli_real_escape_string($this->conexion, $email) : null;
+        $telefono = $telefono ? mysqli_real_escape_string($this->conexion, $telefono) : null;
+        $departamento_id = $departamento_id ? intval($departamento_id) : null;
+    
         $query = "UPDATE empleados SET 
                   nombre = '$nombre', 
                   apellido = '$apellido', 
-                  email = '$email', 
-                  telefono = '$telefono', 
-                  departamento_id = $departamento_id 
+                  email = " . ($email ? "'$email'" : "NULL") . ", 
+                  telefono = " . ($telefono ? "'$telefono'" : "NULL") . ", 
+                  departamento_id = " . ($departamento_id ? $departamento_id : "NULL") . " 
                   WHERE empleado_id = $id";
         
         if (mysqli_query($this->conexion, $query)) {
