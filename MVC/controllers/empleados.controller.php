@@ -35,10 +35,10 @@ switch ($_GET["op"]) {
         $telefono = $_POST["telefono"] ?? null;
         $departamento_id = $_POST["departamento_id"] ?? null;
 
-        if ($nombre && $apellido) {
+        if ($nombre && $apellido && $departamento_id) {
             $resultado = $empleados->insertar($nombre, $apellido, $email, $telefono, $departamento_id);
             if (is_numeric($resultado)) {
-                echo json_encode(["status" => "success", "message" => "Empleado insertado correctamente", "id" => $resultado]);
+                echo json_encode(["status" => "success", "message" => "Empleado insertado y asignado correctamente", "id" => $resultado]);
             } else {
                 echo json_encode(["status" => "error", "message" => $resultado]);
             }
@@ -47,32 +47,32 @@ switch ($_GET["op"]) {
         }
         break;
 
-        case 'actualizar':
-            $empleado_id = $_POST["empleado_id"] ?? null;
-            $nombre = $_POST["nombre"] ?? null;
-            $apellido = $_POST["apellido"] ?? null;
-            $email = $_POST["email"] ?? '';
-            $telefono = $_POST["telefono"] ?? '';
-            $departamento_id = $_POST["departamento_id"] ?? null;
-        
-            if ($empleado_id && $nombre && $apellido) {
-                $resultado = $empleados->actualizar($empleado_id, $nombre, $apellido, $email, $telefono, $departamento_id);
-                if (is_numeric($resultado)) {
-                    echo json_encode(["status" => "success", "message" => "Empleado actualizado correctamente"]);
-                } else {
-                    echo json_encode(["status" => "error", "message" => $resultado]);
-                }
+    case 'actualizar':
+        $empleado_id = $_POST["empleado_id"] ?? null;
+        $nombre = $_POST["nombre"] ?? null;
+        $apellido = $_POST["apellido"] ?? null;
+        $email = $_POST["email"] ?? '';
+        $telefono = $_POST["telefono"] ?? '';
+        $departamento_id = $_POST["departamento_id"] ?? null;
+    
+        if ($empleado_id && $nombre && $apellido && $departamento_id) {
+            $resultado = $empleados->actualizar($empleado_id, $nombre, $apellido, $email, $telefono, $departamento_id);
+            if (is_numeric($resultado)) {
+                echo json_encode(["status" => "success", "message" => "Empleado actualizado y asignación modificada correctamente"]);
             } else {
-                echo json_encode(["status" => "error", "message" => "Faltan datos requeridos"]);
+                echo json_encode(["status" => "error", "message" => $resultado]);
             }
-            break;
+        } else {
+            echo json_encode(["status" => "error", "message" => "Faltan datos requeridos"]);
+        }
+        break;
 
     case 'eliminar':
         $id = isset($_POST["id"]) ? intval($_POST["id"]) : 0;
         if ($id > 0) {
             $resultado = $empleados->eliminar($id);
             if ($resultado > 0) {
-                echo json_encode(["status" => "success", "message" => "Empleado eliminado correctamente"]);
+                echo json_encode(["status" => "success", "message" => "Empleado y sus asignaciones eliminados correctamente"]);
             } else {
                 echo json_encode(["status" => "error", "message" => "No se pudo eliminar el empleado"]);
             }
