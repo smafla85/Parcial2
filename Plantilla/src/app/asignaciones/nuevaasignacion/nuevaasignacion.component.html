@@ -1,0 +1,39 @@
+<div class="container">
+    <h2>{{ isEditing ? 'Editar' : 'Nueva' }} Asignación</h2>
+    <form [formGroup]="asignacionForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="empleado_id" class="form-label">Empleado</label>
+        <select class="form-select" id="empleado_id" formControlName="empleado_id">
+          <option value="">Seleccione un empleado</option>
+          <option *ngFor="let empleado of empleados" [value]="empleado.empleado_id">
+            {{ empleado.nombre }} {{ empleado.apellido }}
+          </option>
+        </select>
+      </div>
+  
+      <div class="mb-3">
+        <label for="departamento_id" class="form-label">Departamento</label>
+        <select class="form-select" id="departamento_id" formControlName="departamento_id">
+          <option value="">Seleccione un departamento</option>
+          <option *ngFor="let departamento of departamentos" [value]="departamento.departamento_id">
+            {{ departamento.nombre }}
+          </option>
+        </select>
+      </div>
+  
+      <div class="mb-3">
+        <label for="fecha_inicio" class="form-label">Fecha de Inicio</label>
+        <input type="date" class="form-control" id="fecha_inicio" formControlName="fecha_inicio">
+      </div>
+  
+      <div class="mb-3">
+        <label for="fecha_fin" class="form-label">Fecha de Fin</label>
+        <input type="date" class="form-control" id="fecha_fin" formControlName="fecha_fin">
+      </div>
+  
+      <button type="submit" class="btn btn-primary" [disabled]="asignacionForm.invalid">
+        {{ isEditing ? 'Actualizar' : 'Crear' }} Asignación
+      </button>
+      <button type="button" class="btn btn-secondary ms-2" (click)="cancelar()">Cancelar</button>
+    </form>
+  </div>

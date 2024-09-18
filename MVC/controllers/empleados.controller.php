@@ -67,19 +67,19 @@ switch ($_GET["op"]) {
         }
         break;
 
-    case 'eliminar':
-        $id = isset($_POST["id"]) ? intval($_POST["id"]) : 0;
-        if ($id > 0) {
-            $resultado = $empleados->eliminar($id);
-            if ($resultado > 0) {
-                echo json_encode(["status" => "success", "message" => "Empleado y sus asignaciones eliminados correctamente"]);
+        case 'eliminar':
+            $id = isset($_POST["id"]) ? intval($_POST["id"]) : 0;
+            if ($id > 0) {
+                $resultado = $empleados->eliminar($id);
+                if ($resultado >= 0) {  // Cambiado de > 0 a >= 0
+                    echo json_encode(["status" => "success", "message" => "Empleado y sus asignaciones eliminados correctamente"]);
+                } else {
+                    echo json_encode(["status" => "error", "message" => $resultado]);  // Devuelve el mensaje de error específico
+                }
             } else {
-                echo json_encode(["status" => "error", "message" => "No se pudo eliminar el empleado"]);
+                echo json_encode(["status" => "error", "message" => "ID no válido"]);
             }
-        } else {
-            echo json_encode(["status" => "error", "message" => "ID no válido"]);
-        }
-        break;
+            break;
 
     default:
         echo json_encode(["status" => "error", "message" => "Operación no válida"]);

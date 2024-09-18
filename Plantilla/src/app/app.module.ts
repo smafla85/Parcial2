@@ -7,10 +7,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './theme/shared/shared.module';
-import { ProveedoresComponent } from './proveedores/proveedores.component';
+//import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NuevoproveedorComponent } from './proveedores/nuevoproveedor/nuevoproveedor.component';
+//import { NuevoproveedorComponent } from './proveedores/nuevoproveedor/nuevoproveedor.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,8 +19,8 @@ import { NuevoproveedorComponent } from './proveedores/nuevoproveedor/nuevoprove
     AppRoutingModule,
     SharedModule,
     BrowserAnimationsModule,
-    ProveedoresComponent,
-    NuevoproveedorComponent,
+    //ProveedoresComponent,
+    //NuevoproveedorComponent,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule

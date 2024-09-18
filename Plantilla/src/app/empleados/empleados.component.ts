@@ -48,14 +48,16 @@ export class EmpleadosComponent implements OnInit {
       this.empleadoService.eliminar(id).subscribe({
         next: (response) => {
           if (response.status === 'success') {
-            this.cargarEmpleados();
+            console.log('Empleado eliminado correctamente');
+            this.cargarEmpleados();  // Recargar la lista de empleados
           } else {
             this.error = 'Error al eliminar empleado: ' + response.message;
+            console.error('Error al eliminar empleado:', response.message);
           }
         },
         error: (error) => {
-          this.error = 'Error al eliminar empleado';
-          console.error('Error al eliminar empleado:', error);
+          this.error = 'Error en la solicitud de eliminación';
+          console.error('Error en la solicitud de eliminación:', error);
         }
       });
     }

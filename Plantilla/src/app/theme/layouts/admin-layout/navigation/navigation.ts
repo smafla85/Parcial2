@@ -19,7 +19,7 @@ export interface NavigationItem {
 }
 
 export const NavigationItems: NavigationItem[] = [
-  {
+ /* {
     id: 'dashboard',
     title: 'Dashboard',
     type: 'group',
@@ -35,7 +35,7 @@ export const NavigationItems: NavigationItem[] = [
         breadcrumbs: false
       }
     ]
-  },
+  },*/
   /* {
     id: 'authentication',
     title: 'Authentication',
@@ -70,7 +70,7 @@ export const NavigationItems: NavigationItem[] = [
     type: 'group',
     icon: 'icon-navigation',
     children: [
-      {
+     /* {
         id: 'proveedores',
         title: 'Proveedores',
         type: 'item',
@@ -93,7 +93,23 @@ export const NavigationItems: NavigationItem[] = [
         classes: 'nav-item',
         url: '/facturas',
         icon: 'ant-design'
+      }, 
+      {
+        id: 'productos',
+        title: 'Productos',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/productos',
+        icon: 'ant-design'
       },
+      {
+        id: 'pedidos',
+        title: 'Pedidos',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/pedidos',
+        icon: 'ant-design'
+      }, */
 	        {
         id: 'empleados',
         title: 'Empleados',
@@ -110,10 +126,19 @@ export const NavigationItems: NavigationItem[] = [
         url: '/departamentos',
         icon: 'ant-design'
       },
+      {
+        id: 'asignaciones',
+        title: 'Asignaciones',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/asignaciones',
+        icon: 'ant-design'
+      },
+      
     ]
   },
 
-  {
+  /*{
     id: 'other',
     title: 'Other',
     type: 'group',
@@ -138,5 +163,5 @@ export const NavigationItems: NavigationItem[] = [
         external: true
       }
     ]
-  }
+  }*/
 ];

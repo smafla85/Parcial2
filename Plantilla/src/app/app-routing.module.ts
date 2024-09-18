@@ -13,7 +13,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/dashboard/default',
+        redirectTo: '/empleados', // Cambiado de '/dashboard/default' a '/empleados'
         pathMatch: 'full'
       },
       {
@@ -32,7 +32,7 @@ const routes: Routes = [
         path: 'sample-page',
         loadComponent: () => import('./demo/other/sample-page/sample-page.component')
       },
-      {
+     /* {
         path: 'proveedores',
         loadComponent: () => import('./proveedores/proveedores.component').then((m) => m.ProveedoresComponent)
       },
@@ -67,7 +67,7 @@ const routes: Routes = [
       {
         path: 'facturas',
         loadComponent: () => import('./facturas/facturas.component').then((m) => m.FacturasComponent)
-      },
+      },*/
       {
         path: 'empleados',
         loadComponent: () => import('./empleados/empleados.component').then((m) => m.EmpleadosComponent)
@@ -80,8 +80,7 @@ const routes: Routes = [
         path: 'editarempleado/:id',
         loadComponent: () => import('./empleados/nuevoempleado/nuevoempleado.component').then((m) => m.NuevoEmpleadoComponent)
       },
-
-          {
+      {
         path: 'departamentos',
         loadComponent: () => import('./departamentos/departamentos.component').then((m) => m.DepartamentosComponent)
       },
@@ -92,6 +91,19 @@ const routes: Routes = [
       {
         path: 'editardepartamento/:id',
         loadComponent: () => import('./departamentos/nuevodepartamento/nuevodepartamento.component').then((m) => m.NuevodepartamentoComponent)
+      },
+      // Nuevas rutas para asignaciones
+      {
+        path: 'asignaciones',
+        loadComponent: () => import('./asignaciones/asignaciones.component').then((m) => m.AsignacionesComponent)
+      },
+      {
+        path: 'nuevaasignacion',
+        loadComponent: () => import('./asignaciones/nuevaasignacion/nuevaasignacion.component').then((m) => m.NuevaasignacionComponent)
+      },
+      {
+        path: 'editarasignacion/:id',
+        loadComponent: () => import('./asignaciones/nuevaasignacion/nuevaasignacion.component').then((m) => m.NuevaasignacionComponent)
       },
     ]
   },

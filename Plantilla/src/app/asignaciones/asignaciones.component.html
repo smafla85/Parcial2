@@ -1,0 +1,45 @@
+<div class="container">
+    <h2>Lista de Asignaciones</h2>
+    
+    <div class="mb-3">
+      <button class="btn btn-primary me-2" (click)="nuevaAsignacion()">Nueva Asignación</button>
+      <!--<button class="btn btn-secondary" (click)="generarReporte()">Generar Reporte</button>-->
+      <button class="btn btn-success" (click)="generarReporte()">Generar Reporte</button>
+    </div>
+  
+    <div class="text-center" *ngIf="loading">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+    </div>
+  
+    <table class="table table-striped" *ngIf="!loading && asignaciones.length > 0">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Empleado</th>
+          <th>Departamento</th>
+          <th>Fecha Inicio</th>
+          <th>Fecha Fin</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let asignacion of asignaciones">
+          <td>{{ asignacion.asignacion_id }}</td>
+          <td>{{ asignacion.nombre_empleado }} {{ asignacion.apellido_empleado }}</td>
+          <td>{{ asignacion.nombre_departamento }}</td>
+          <td>{{ asignacion.fecha_inicio | date:'dd/MM/yyyy' }}</td>
+          <td>{{ asignacion.fecha_fin ? (asignacion.fecha_fin | date:'dd/MM/yyyy') : 'Actual' }}</td>
+          <td>
+            <button class="btn btn-sm btn-primary me-1" (click)="editarAsignacion(asignacion.asignacion_id)">Editar</button>
+            <button class="btn btn-sm btn-danger" (click)="eliminarAsignacion(asignacion.asignacion_id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div class="alert alert-info" *ngIf="!loading && asignaciones.length === 0">
+      No hay asignaciones registradas.
+    </div>
+  </div>
