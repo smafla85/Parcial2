@@ -1,12 +1,3 @@
-Instalacion 
-NodeJs
-Angular
-pnpm
------
-Direcionar a la ruta dobnde quiero que se cree el proyecto
-
---Proeycto Angular
-
-Servicios => Service  => ng g service Nombre_Servicio
-    HttpClient => controllers/proveedores.cotrollers.php?op=todos
-
+Sistema de Gestión de Empleados: Diseña una base de datos para gestionar departamentos y empleados, 
+incluyendo asignaciones. Tablas: `Departamentos` (departamento_id, nombre, ubicacion, jefe_departamento, extension), 
+`Empleados` (empleado_id, nombre, apellido, email, telefono). Leonardo Mafla
